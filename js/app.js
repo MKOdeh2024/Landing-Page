@@ -1,25 +1,26 @@
-// Build the navigation menu
+// Build navigation menu
+
 function buildNav() {
     const navList = document.getElementById('nav-list');
     const sections = document.querySelectorAll('section');
 
-    sections.forEach(section => {
+    sections.forEach((section, index) => {
         const listItem = document.createElement('li');
         const link = document.createElement('a');
         link.textContent = section.getAttribute('data-nav');
-        link.href = `#${section.id}`;
-        link.classList.add('menu__link');
+        link.setAttribute('data-section', section.id);
         listItem.appendChild(link);
         navList.appendChild(listItem);
     });
 }
 
 // Smooth scroll to section
+// Smooth scroll to section
 function smoothScroll(event) {
     event.preventDefault();
-    if (event.target.classList.contains('menu__link')) {
-        const targetId = event.target.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+    if (event.target.tagName === 'A') {
+        const targetId = event.target.getAttribute('data-section');
+        const targetSection = document.getElementById(targetId);
         targetSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
@@ -31,13 +32,10 @@ function setActiveSection() {
 
     sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
-        if (rect.top <= 150 && rect.bottom >= 150) {
-            section.classList.add('active-section');
-            navLinks[index].classList.add('active');
-        } else {
-            section.classList.remove('active-section');
-            navLinks[index].classList.remove('active');
-        }
+        const isActive = rect.top <= 150 && rect.bottom >= 150;
+
+        section.classList.toggle('active', isActive);
+        navLinks[index].classList.toggle('active', isActive);
     });
 }
 
@@ -71,6 +69,15 @@ function hideNavbarWhileNotScrolling() {
     }, 2000);
 }
 
+
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', buildNav);
+document.querySelector('#nav-list').addEventListener('click', smoothScroll);
+window.addEventListener('scroll', setActiveSection);
+
+
+/** 
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     buildNav();
@@ -82,4 +89,4 @@ window.addEventListener('scroll', () => {
     setActiveSection();
     toggleScrollTopButton();
     hideNavbarWhileNotScrolling();
-});
+}); **/

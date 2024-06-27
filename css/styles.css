@@ -56,7 +56,9 @@ footer {
 
 #nav-list a:hover,
 #nav-list a.active {
-    color: #ffd700;
+    background-color: #ffd700;
+    color: #1c2331;
+    border-radius: 3px;
 }
 
 main {
@@ -72,6 +74,19 @@ section {
 .section-content {
     max-width: 800px;
     margin: 0 auto;
+}
+
+
+/* Active state for sections */
+
+section.active {
+    background-color: #333;
+    border-left: 5px solid #ffd700;
+}
+
+section.active h2,
+section.active p {
+    color: #ffffff;
 }
 
 h2 {
@@ -131,22 +146,12 @@ p {
     header {
         padding: 0.5rem;
     }
-    nav {
-        justify-content: center;
-    }
     #nav-list {
         flex-wrap: wrap;
+        justify-content: center;
     }
     #nav-list li {
-        margin: 0.5rem 1rem;
-    }
-    h2 {
-        font-size: 2.5rem;
-    }
-    .circle-top-left,
-    .circle-bottom-right {
-        width: 150px;
-        height: 150px;
+        margin: 0.25rem 0.5rem;
     }
 }
 
@@ -160,23 +165,12 @@ p {
     }
     #nav-list li {
         margin: 0.5rem 0;
+        width: 100%;
+        text-align: center;
     }
-    main {
-        margin-top: 0;
-    }
-    section {
-        padding: 2rem 1rem;
-    }
-    h2 {
-        font-size: 2rem;
-    }
-    .circle-top-left,
-    .circle-bottom-right {
-        width: 100px;
-        height: 100px;
-    }
-    .footer-separator {
-        width: 70%;
+    #nav-list a {
+        display: block;
+        padding: 0.5rem;
     }
 }
 
